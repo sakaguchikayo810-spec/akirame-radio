@@ -1,0 +1,183 @@
+/* ヒーローセクション - 縦分割ツートンカラー */
+
+/* Bukhari Script フォントの読み込み（DaFontから正式ダウンロード） */
+@font-face {
+  font-family: 'Bukhari Script';
+  src: url('../fonts/Bukhari Script.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 縦分割背景 */
+.hero-split-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-split-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: var(--color-green);
+}
+
+.hero-split-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: var(--color-pink);
+}
+
+/* ヒーローコンテンツ */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--spacing-2xl);
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ロゴ - Bukhari Script フォント（メインロゴのみ使用） */
+.hero-logo {
+  /* Bukhari Script フォントを使用 */
+  font-family: 'Bukhari Script', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 400;
+  color: var(--color-black);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* 絶対に折り返さない */
+  white-space: nowrap;
+  overflow: visible;
+  
+  /* フレックスボックスで自動縮小 */
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* タグライン - M PLUS 1 使用 */
+.hero-tagline {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: var(--font-black);
+  color: var(--color-black);
+  margin-bottom: var(--spacing-3xl);
+  line-height: 1.6;
+}
+
+/* Spotifyボタン - M PLUS 1 使用 */
+.btn-spotify-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-3xl);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-xl);
+  font-weight: var(--font-bold);
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-spotify-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2xl);
+  background-color: #1db954;
+}
+
+.btn-spotify-hero svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+  .hero-split-left,
+  .hero-split-right {
+    width: 100%;
+    height: 50%;
+  }
+  
+  .hero-split-left {
+    top: 0;
+    left: 0;
+  }
+  
+  .hero-split-right {
+    top: 50%;
+    left: 0;
+  }
+  
+  .hero-content {
+    padding: var(--spacing-xl);
+  }
+  
+  .hero-logo {
+    font-size: clamp(2rem, 12vw, 4rem);
+    /* モバイルでも絶対に折り返さない */
+    white-space: nowrap;
+  }
+  
+  .hero-tagline {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .btn-spotify-hero {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-lg);
+  }
+}
+
+/* 極小画面でもロゴを折り返さない */
+@media (max-width: 480px) {
+  .hero-logo {
+    font-size: clamp(1.5rem, 15vw, 3rem);
+    /* 絶対に折り返さない */
+    white-space: nowrap;
+  }
+  
+  .btn-spotify-hero {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-base);
+    gap: var(--spacing-sm);
+  }
+}
+
+/* 超極小画面（320px以下）でも対応 */
+@media (max-width: 320px) {
+  .hero-logo {
+    font-size: clamp(1.25rem, 18vw, 2.5rem);
+    white-space: nowrap;
+  }
+}

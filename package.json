@@ -1,0 +1,12 @@
+{
+  "name": "akirame-radio",
+  "version": "1.0.0",
+  "description": "あきらめラジオ - 公式Webサイト",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["podcast", "radio"],
+  "author": "",
+  "license": "MIT"
+}

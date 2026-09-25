@@ -1,0 +1,129 @@
+/* コンポーネントスタイル */
+
+/* ボタン共通 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-family: var(--font-ja-bold);
+  font-size: var(--font-base);
+  font-weight: var(--font-bold);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 2px solid var(--color-black);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+/* カード */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* バッジ */
+.badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-family: var(--font-ja-bold);
+  font-size: var(--font-xs);
+  font-weight: var(--font-bold);
+  border-radius: var(--radius-full);
+}
+
+.badge-green {
+  background-color: var(--color-green);
+  color: var(--color-black);
+}
+
+.badge-pink {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+.badge-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+/* ローディング */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-3xl);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--color-gray-200);
+  border-top-color: var(--color-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* エラーメッセージ */
+.error-message {
+  background-color: #fee;
+  color: #c00;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-ja-regular);
+  font-size: var(--font-sm);
+}
+
+/* 空状態 */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-4xl);
+  color: var(--text-tertiary);
+}
+
+.empty-state-icon {
+  font-size: var(--font-5xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.empty-state-text {
+  font-family: var(--font-ja-regular);
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+}

@@ -1,0 +1,954 @@
+/* セクション共通スタイル */
+
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+/* セクションタイトル - M PLUS 1 使用 */
+.section-title-en {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-black);
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: 0.05em;
+}
+
+.section-title-ja {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: var(--font-black);
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.6;
+}
+
+.section-subtitle-ja {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-3xl);
+  line-height: 1.6;
+}
+
+/* VISION & PHILOSOPHY セクション */
+.vision-section {
+  padding: var(--spacing-6xl) 0;
+  background-color: var(--bg-primary);
+}
+
+.vision-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vision-content p {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-lg);
+  font-weight: var(--font-normal);
+  color: var(--text-secondary);
+  line-height: 2;
+  margin-bottom: var(--spacing-xl);
+}
+
+.vision-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* セリフで見るあきらめラジオ セクション - COTEN RADIO風テキストコラージュ */
+.quotes-section {
+  padding: var(--spacing-6xl) 0;
+  background-color: var(--bg-secondary);
+}
+
+.quotes-collage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-top: var(--spacing-3xl);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.quote-item {
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 8px 12px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  flex-shrink: 0;
+  outline: none;
+  border: none;
+}
+
+.quote-item:focus {
+  outline: none;
+  border: none;
+}
+
+.quote-item:active {
+  outline: none;
+  border: none;
+}
+
+.quote-item:hover {
+  transform: scale(1.03);
+}
+
+.quote-item:hover .quote-text {
+  opacity: 0.8;
+}
+
+.quote-item .quote-text {
+  line-height: 1.6;
+  transition: all 0.3s ease;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+  display: block;
+}
+
+/* Font families */
+.quote-item[data-font="noto"] .quote-text {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.quote-item[data-font="shippori"] .quote-text {
+  font-family: 'Shippori Mincho', serif;
+}
+
+.quote-item[data-font="yomogi"] .quote-text {
+  font-family: 'Yomogi', cursive;
+}
+
+/* Individual quote styling */
+
+/* Quote 1 - 黒太字ゴシック / 大型タイトル */
+.quote-1 {
+  max-width: 650px;
+  min-width: 450px;
+  width: 100%;
+}
+
+.quote-1 .quote-text {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: #111111;
+  line-height: 1.5;
+}
+
+/* Quote 2 - 黒標準ゴシック / 中型 */
+.quote-2 {
+  max-width: 380px;
+  min-width: 280px;
+}
+
+.quote-2 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: #111111;
+}
+
+/* Quote 3 - ピンク色太字ゴシック */
+.quote-3 {
+  max-width: 420px;
+  min-width: 300px;
+}
+
+.quote-3 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #ff78cb;
+}
+
+/* Quote 4 - ピンク色太字ゴシック */
+.quote-4 {
+  max-width: 350px;
+  min-width: 280px;
+}
+
+.quote-4 .quote-text {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: #ff78cb;
+}
+
+/* Quote 5 - 黒標準ゴシック / 中型 */
+.quote-5 {
+  max-width: 480px;
+  min-width: 350px;
+}
+
+.quote-5 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: #111111;
+}
+
+/* Quote 6 - ピンク色明朝体 */
+.quote-6 {
+  max-width: 420px;
+  min-width: 320px;
+}
+
+.quote-6 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: #ff78cb;
+}
+
+/* Quote 7 - 緑色太字横書き表示（行間詰め） */
+.quote-7 {
+  max-width: 420px;
+  min-width: 320px;
+}
+
+.quote-7 .quote-text {
+  font-size: clamp(1rem, 1.75vw, 1.375rem);
+  font-weight: 700;
+  color: #6aff67;
+  line-height: 1.4;
+}
+
+/* Quote 8 - 黒太字明朝体 */
+.quote-8 {
+  max-width: 380px;
+  min-width: 280px;
+}
+
+.quote-8 .quote-text {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: #111111;
+}
+
+/* Quote 9 - ピンク色太字ゴシック */
+.quote-9 {
+  max-width: 600px;
+  min-width: 450px;
+}
+
+.quote-9 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #ff78cb;
+}
+
+/* Quote 10 - 黒明朝体 */
+.quote-10 {
+  max-width: 350px;
+  min-width: 280px;
+}
+
+.quote-10 .quote-text {
+  font-size: clamp(1rem, 1.75vw, 1.375rem);
+  font-weight: 400;
+  color: #111111;
+}
+
+/* 追加名言1 - 黒太字ゴシック / 横長配置 */
+.quote-11 {
+  max-width: 550px;
+  min-width: 400px;
+  width: 100%;
+}
+
+.quote-11 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #111111;
+}
+
+/* 追加名言2 - ピンク色太字ゴシック / 中型 */
+.quote-12 {
+  max-width: 420px;
+  min-width: 320px;
+}
+
+.quote-12 .quote-text {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #ff78cb;
+}
+
+/* 追加名言3 - 緑色太字明朝体 / 大型 */
+.quote-13 {
+  max-width: 450px;
+  min-width: 320px;
+}
+
+.quote-13 .quote-text {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 900;
+  color: #6aff67;
+}
+
+/* ALL SERIES セクション */
+.all-series-section {
+  padding: var(--spacing-6xl) 0;
+  background-color: var(--bg-green);
+}
+
+/* タグフィルター */
+.tags-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.tag-btn {
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: var(--color-white);
+  color: var(--text-primary);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  font-weight: var(--font-bold);
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.tag-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tag-btn.active {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+/* エピソードグリッド */
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--spacing-2xl);
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .episodes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .episodes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.episode-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  height: 100%;
+}
+
+.episode-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.episode-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.episode-genre-badge {
+  padding: var(--spacing-xs) var(--spacing-lg);
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-sm);
+  font-weight: var(--font-bold);
+  border-radius: var(--radius-full);
+}
+
+.episode-title {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: var(--font-black);
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-md);
+}
+
+.episode-meta {
+  margin-bottom: var(--spacing-sm);
+}
+
+.episode-guest {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.meta-label {
+  font-weight: var(--font-bold);
+  color: var(--text-tertiary);
+}
+
+.meta-value {
+  font-weight: var(--font-normal);
+}
+
+.episode-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.sub-tag {
+  padding: 4px 12px;
+  background-color: #f0f0f0;
+  color: var(--text-secondary);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-xs);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
+
+.episode-mood {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: #f8f8f8;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.mood-icon {
+  font-size: 1.25rem;
+}
+
+.mood-text {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+}
+
+.episode-summary {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  flex: 1;
+  margin-bottom: var(--spacing-md);
+}
+
+.episode-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+}
+
+.btn-listen {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-sm);
+  font-weight: var(--font-bold);
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.btn-listen:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  opacity: 0.9;
+}
+
+.btn-spotify {
+  background-color: #1DB954;
+}
+
+.btn-spotify:hover {
+  background-color: #1ed760;
+}
+
+.btn-apple {
+  background-color: #FC3C44;
+}
+
+.btn-apple:hover {
+  background-color: #ff4d54;
+}
+
+.btn-listen svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 非活性ボタン（URLが空欄の場合） */
+.btn-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #cccccc !important;
+}
+
+.btn-disabled:hover {
+  transform: none;
+  box-shadow: none;
+  background-color: #cccccc !important;
+}
+
+/* 空の状態 */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.empty-state-text {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+}
+
+/* ローディング状態 */
+.loading-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto var(--spacing-lg);
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--color-pink);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+}
+
+/* エラー状態 */
+.error-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.error-text {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-lg);
+  color: #d32f2f;
+}
+
+/* RECOMMEND セクション */
+.recommend-section {
+  padding: var(--spacing-6xl) 0;
+  background-color: var(--bg-primary);
+}
+
+.recommend-header {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.recommend-volume {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.recommend-lead {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 800px;
+}
+
+.recommend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
+}
+
+/* レコメンドカード */
+.recommend-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+}
+
+.recommend-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.recommend-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+.recommender-info-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.recommender-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #f0f0f0;
+}
+
+.recommender-info {
+  flex: 1;
+}
+
+.recommender-title {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+  font-weight: var(--font-medium);
+}
+
+.recommender-name {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  color: var(--text-primary);
+  font-weight: var(--font-bold);
+}
+
+.theme-badge {
+  padding: 6px 14px;
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-xs);
+  font-weight: var(--font-bold);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.recommend-episode-title {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: var(--spacing-md);
+}
+
+.recommend-comment {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  flex: 1;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: #f8f8f8;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-pink);
+}
+
+.recommend-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+}
+
+/* フッター */
+.site-footer {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: var(--spacing-4xl) 0 var(--spacing-xl);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-3xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.footer-logo h3 {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-3xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-logo p {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.footer-links h4,
+.footer-social h4 {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing-md);
+}
+
+.platform-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.platform-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.platform-link:hover {
+  color: var(--color-white);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
+  transition: all var(--transition-base);
+}
+
+.social-links a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--spacing-xl);
+  text-align: center;
+}
+
+.copyright {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .vision-section,
+  .quotes-section,
+  .all-series-section,
+  .recommend-section {
+    padding: var(--spacing-4xl) 0;
+  }
+  
+  /* モバイル用コラージュレイアウト */
+  .quotes-collage {
+    gap: 16px;
+  }
+  
+  .quote-item {
+    padding: 14px 16px;
+  }
+  
+  /* Quote 1 - 黒太字ゴシック / 大型 */
+  .quote-1 {
+    max-width: 100%;
+  }
+  
+  .quote-1 .quote-text {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  
+  /* Quote 2 - 黒標準ゴシック / 中型 */
+  .quote-2 {
+    max-width: 100%;
+  }
+  
+  .quote-2 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  /* Quote 3 - 緑色太字ゴシック */
+  .quote-3 {
+    max-width: 100%;
+  }
+  
+  .quote-3 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  /* Quote 4 - ピンク色太字ゴシック */
+  .quote-4 {
+    max-width: 100%;
+  }
+  
+  .quote-4 .quote-text {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  /* Quote 5 - 黒標準ゴシック / 中型 */
+  .quote-5 {
+    max-width: 100%;
+  }
+  
+  .quote-5 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  /* Quote 6 - ピンク色手書き風 */
+  .quote-6 {
+    max-width: 100%;
+  }
+  
+  .quote-6 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  /* Quote 7 - 緑色横書き（行間詰め） */
+  .quote-7 {
+    max-width: 100%;
+  }
+  
+  .quote-7 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+    line-height: 1.4;
+  }
+  
+  /* Quote 8 - 黒明朝体 */
+  .quote-8 {
+    max-width: 100%;
+  }
+  
+  .quote-8 .quote-text {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  /* Quote 9 - ピンク色太字ゴシック */
+  .quote-9 {
+    max-width: 100%;
+  }
+  
+  .quote-9 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  /* Quote 10 - 黒斜体・明朝体 */
+  .quote-10 {
+    max-width: 100%;
+  }
+  
+  .quote-10 .quote-text {
+    font-size: clamp(0.75rem, 3vw, 1rem);
+  }
+  
+  .episodes-grid,
+  .recommend-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tags-filter {
+    gap: var(--spacing-sm);
+  }
+  
+  .tag-btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-sm);
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+}

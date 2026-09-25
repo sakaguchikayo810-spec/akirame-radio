@@ -1,0 +1,110 @@
+/* レイアウト基本スタイル */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* M PLUS 1 をサイト全体の標準フォントとして使用 */
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* コンテナ */
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+/* セクション共通 */
+section {
+  position: relative;
+}
+
+/* 画像 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* リンク */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-base);
+}
+
+/* ボタン */
+button {
+  font-family: 'M PLUS 1', sans-serif;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--transition-base);
+}
+
+button:focus,
+a:focus {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+/* リスト */
+ul, ol {
+  list-style: none;
+}
+
+/* 見出し */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'M PLUS 1', sans-serif;
+  font-weight: var(--font-bold);
+  line-height: 1.2;
+}
+
+/* パラグラフ */
+p {
+  margin-bottom: var(--spacing-md);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* ユーティリティクラス */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
