@@ -601,6 +601,15 @@
   background-color: var(--bg-primary);
 }
 
+.recommend-section .section-subtitle-ja {
+  font-family: 'M PLUS 1', sans-serif;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-2xl);
+  font-weight: var(--font-normal);
+}
+
 .recommend-header {
   margin-bottom: var(--spacing-3xl);
 }
@@ -610,15 +619,7 @@
   font-size: var(--font-xl);
   font-weight: var(--font-bold);
   color: var(--text-primary);
-  margin-bottom: var(--spacing-md);
-}
-
-.recommend-lead {
-  font-family: 'M PLUS 1', sans-serif;
-  font-size: var(--font-base);
-  color: var(--text-secondary);
-  line-height: 1.8;
-  max-width: 800px;
+  margin-bottom: 0;
 }
 
 .recommend-grid {

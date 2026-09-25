@@ -163,24 +163,47 @@ function parseRecommendCSV(csvText) {
     // CSVの列を解析
     const columns = parseCSVLine(line);
     
-    // 列が8つ未満、またはエピソードタイトル（A列/columns[0]）が空の場合はスキップ
-    if (columns.length < 8 || !columns[0] || columns[0].trim() === '') {
+    // 列が8つ未満の場合はスキップ
+    if (columns.length < 8) {
       continue;
     }
     
-    // G列（columns[6]）: Spotify URL
-    // H列（columns[7]）: Apple Podcast URL
+    // A列：エピソードタイトル
+    // B列：エピソード番号
+    const episodeTitle = columns[0] ? columns[0].trim() : '';
+    const episodeNumber = columns[1] ? columns[1].trim() : '';
+    
+    // タイトルまたは番号が空の場合はスキップ
+    if (!episodeTitle || !episodeNumber) {
+      continue;
+    }
+    
+    // エピソード82を除外（企画回のため）
+    if (episodeNumber === '82') {
+      continue;
+    }
+    
+    // C列：推薦者肩書き
+    // D列：推薦者名
+    // E列：選定テーマ
+    // F列：推薦コメント
+    // G列：Spotify URL
+    // H列：Apple Podcast URL
+    const recommenderTitle = columns[2] ? columns[2].trim() : '';
+    const recommenderName = columns[3] ? columns[3].trim() : '';
+    const theme = columns[4] ? columns[4].trim() : '';
+    const comment = columns[5] ? columns[5].trim() : '';
     const spotifyUrl = columns[6] ? columns[6].trim() : '';
     const appleUrl = columns[7] ? columns[7].trim() : '';
     
     recommendations.push({
       id: i,
-      episodeTitle: columns[0] || '無題',
-      episodeNumber: columns[1] || '',
-      recommenderTitle: columns[2] || '',
-      recommenderName: columns[3] || '',
-      theme: columns[4] || '',
-      comment: columns[5] || '',
+      episodeTitle: episodeTitle,
+      episodeNumber: episodeNumber,
+      recommenderTitle: recommenderTitle,
+      recommenderName: recommenderName,
+      theme: theme,
+      comment: comment,
       spotifyUrl: spotifyUrl,
       appleUrl: appleUrl
     });
@@ -297,10 +320,10 @@ function createRecommendCard(rec) {
   const hasSpotifyUrl = rec.spotifyUrl && rec.spotifyUrl.trim() !== '';
   const hasAppleUrl = rec.appleUrl && rec.appleUrl.trim() !== '';
   
-  // 推薦者の画像パス（JPG画像を優先、存在しない場合はSVGプレースホルダー）
+  // 推薦者の画像パス
   const avatarSrc = 'images/kayo_sakaguchi.jpg';
   
-  // エピソード番号とタイトルを組み合わせて表示
+  // エピソード番号とタイトルを組み合わせて表示（#数字 タイトル の形式）
   const episodeNumberText = rec.episodeNumber ? `#${rec.episodeNumber} ` : '';
   const fullTitle = `${episodeNumberText}${rec.episodeTitle}`;
   
@@ -308,7 +331,7 @@ function createRecommendCard(rec) {
     <article class="recommend-card">
       <div class="recommend-card-header">
         <div class="recommender-info-wrapper">
-          <img src="${avatarSrc}" alt="${escapeHtml(rec.recommenderName)}" class="recommender-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';">
+          <img src="${avatarSrc}" alt="${escapeHtml(rec.recommenderName)}" class="recommender-avatar">
           <div class="recommender-info">
             <p class="recommender-title">${escapeHtml(rec.recommenderTitle)}</p>
             <p class="recommender-name">${escapeHtml(rec.recommenderName)}</p>
