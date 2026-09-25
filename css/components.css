@@ -138,7 +138,7 @@
   flex-shrink: 0 !important;
 }
 
-/* ヘッダー部分を横並びにする（写真と名前・肩書） */
+/* ヘッダー部分を横並びにする */
 .card-header,
 .author-info {
   display: flex !important;
