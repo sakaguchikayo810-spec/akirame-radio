@@ -324,7 +324,7 @@ function createRecommendCard(rec) {
   const avatarSrc = 'images/kayo_sakaguchi.jpg';
   
   // エピソード番号とタイトルを組み合わせて表示（#数字 タイトル の形式）
- const fullTitle = rec.episodeTitle;
+const fullTitle = rec.title || rec.episodeTitle || '';
   
   return `
     <article class="recommend-card">
