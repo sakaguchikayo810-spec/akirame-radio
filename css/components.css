@@ -127,3 +127,21 @@
   font-size: var(--font-lg);
   color: var(--text-secondary);
 }
+/* プロフィール写真のサイズ固定 */
+.recommend-card img,
+.card-header img,
+.profile-img {
+  width: 48px !important;
+  height: 48px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ヘッダー部分を横並びにする（写真と名前・肩書） */
+.card-header,
+.author-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
