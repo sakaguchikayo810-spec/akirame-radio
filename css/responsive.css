@@ -27,8 +27,13 @@
     --spacing-4xl: 2.5rem;
   }
   
+  /* 横スクロール防止 */
+  body {
+    overflow-x: hidden;
+  }
+  
   .container {
-    padding: 0 var(--spacing-md);
+    padding: 0 1rem;
   }
   
   /* ヒーロー */
@@ -89,14 +94,63 @@
   
   .section-subtitle-ja {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
+    padding: 0 1rem;
   }
   
   /* ビジョン */
+  .vision-content {
+    padding: 0 1rem;
+  }
+  
   .vision-content p {
     font-size: var(--font-base);
   }
   
-  /* クオート */
+  /* クオート - モバイル最適化 */
+  .quotes-collage {
+    padding: 0 1rem;
+  }
+  
+  .quote-item {
+    min-width: auto !important;
+    max-width: 100% !important;
+    width: auto !important;
+    padding: 8px 16px;
+  }
+  
+  .quote-item .quote-text {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  
+  /* 各クオートのフォントサイズをモバイル用に調整 */
+  .quote-1 .quote-text {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+  
+  .quote-2 .quote-text,
+  .quote-3 .quote-text,
+  .quote-5 .quote-text,
+  .quote-6 .quote-text {
+    font-size: clamp(1rem, 4vw, 1.25rem) !important;
+  }
+  
+  .quote-4 .quote-text {
+    font-size: clamp(1.125rem, 4.5vw, 1.5rem) !important;
+  }
+  
+  .quote-7 .quote-text {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem) !important;
+  }
+  
+  .quote-8 .quote-text,
+  .quote-9 .quote-text,
+  .quote-10 .quote-text,
+  .quote-11 .quote-text,
+  .quote-12 .quote-text {
+    font-size: clamp(1rem, 4vw, 1.25rem) !important;
+  }
+  
   .quotes-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
@@ -120,11 +174,15 @@
     font-size: var(--font-sm);
   }
   
-  /* エピソード */
+  /* エピソード - モバイルで3件表示 */
   .episodes-grid,
   .recommend-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
+  }
+  
+  .episodes-grid .episode-card:nth-child(n+4) {
+    display: none;
   }
   
   .episode-card {
