@@ -754,6 +754,11 @@
 /* プロフィール画像（大きめ・角丸） */
 .recommend-avatar-wrapper {
   margin-bottom: var(--spacing-lg);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-height: 180px !important;
 }
 
 .recommend-avatar-large {
@@ -762,6 +767,26 @@
   border-radius: 24px;
   object-fit: cover;
   box-shadow: var(--shadow-md);
+}
+
+/* 画像保護用の専用クラス - レスポンシブ対応でも崩れない */
+.recommend-card-image {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 180px !important;
+  height: 180px !important;
+  min-width: 180px !important;
+  min-height: 180px !important;
+  max-width: 180px !important;
+  max-height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 24px !important;
+  background-color: #f0f0f0 !important;
+  flex-shrink: 0 !important;
+  box-shadow: var(--shadow-md) !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 /* 推薦者情報（中央揃え） */

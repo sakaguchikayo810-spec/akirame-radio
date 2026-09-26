@@ -1,5 +1,26 @@
 /* レスポンシブスタイル */
 
+/* 画像保護 - すべてのブレークポイントで適用 */
+.recommend-card-image,
+.recommend-avatar-large {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 180px !important;
+  height: 180px !important;
+  min-width: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  background-color: #f0f0f0 !important;
+}
+
+.recommend-avatar-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: 180px !important;
+}
+
 /* タブレット（max-width: 1024px） */
 @media (max-width: 1024px) {
   :root {
@@ -185,6 +206,26 @@
     display: none;
   }
   
+  /* レコメンド画像保護 - モバイル */
+  .recommend-card-image,
+  .recommend-avatar-large {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 180px !important;
+    height: 180px !important;
+    min-width: 180px !important;
+    min-height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+  }
+  
+  .recommend-avatar-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    min-height: 180px !important;
+  }
+  
   .episode-card {
     padding: var(--spacing-lg);
   }
@@ -237,6 +278,26 @@
   
   .quote-text {
     font-size: var(--font-base);
+  }
+  
+  /* レコメンド画像保護 - 小型モバイル */
+  .recommend-card-image,
+  .recommend-avatar-large {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 180px !important;
+    height: 180px !important;
+    min-width: 180px !important;
+    min-height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+  }
+  
+  .recommend-avatar-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    min-height: 180px !important;
   }
 }
 

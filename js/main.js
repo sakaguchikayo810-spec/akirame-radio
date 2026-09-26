@@ -209,6 +209,7 @@ function parseRecommendCSV(csvText) {
     // F列（5）：推薦コメント
     // G列（6）：Spotify URL
     // H列（7）：Apple URL
+    // I列（8）：画像ファイル名（オプション）
     const episodeTitle = columns[0] ? columns[0].trim() : '';
     const recommenderTitle = columns[2] ? columns[2].trim() : '';
     const recommenderName = columns[3] ? columns[3].trim() : '';
@@ -216,6 +217,7 @@ function parseRecommendCSV(csvText) {
     const comment = columns[5] || ''; // 改行を保持
     const spotifyUrl = columns[6] ? columns[6].trim() : '';
     const appleUrl = columns[7] ? columns[7].trim() : '';
+    const imageFileName = columns[8] ? columns[8].trim() : ''; // 画像ファイル名
     
     const recData = {
       id: i,
@@ -225,7 +227,8 @@ function parseRecommendCSV(csvText) {
       theme: theme,
       comment: comment,
       spotifyUrl: spotifyUrl,
-      appleUrl: appleUrl
+      appleUrl: appleUrl,
+      imageFileName: imageFileName
     };
     
     recommendations.push(recData);
@@ -360,14 +363,43 @@ function createRecommendCard(rec) {
   console.log('Spotify表示:', hasSpotifyUrl);
   console.log('Apple表示:', hasAppleUrl);
   
-  // 推薦者の画像パス
-  const avatarSrc = 'images/kayo_sakaguchi.jpg';
+  // 推薦者名と画像ファイル名のマッピング
+  const imageNameMap = {
+    '坂口佳世': 'kayo_sakaguchi.jpg',
+    '坂口 佳世': 'kayo_sakaguchi.jpg',
+    'Kayo Sakaguchi': 'kayo_sakaguchi.jpg'
+  };
+  
+  // 推薦者の画像パス（フォールバック付き）
+  let avatarFileName = '';
+  
+  // 1. CSVから画像ファイル名が指定されている場合はそれを使用
+  if (rec.imageFileName && rec.imageFileName.trim() !== '') {
+    avatarFileName = rec.imageFileName.trim();
+  }
+  // 2. マッピングテーブルから検索
+  else if (rec.recommenderName && imageNameMap[rec.recommenderName]) {
+    avatarFileName = imageNameMap[rec.recommenderName];
+  }
+  // 3. デフォルト画像を使用
+  else {
+    avatarFileName = 'kayo_sakaguchi.jpg';
+  }
+  
+  const avatarSrc = `images/${avatarFileName}`;
+  const fallbackAvatarSrc = 'images/kayo_sakaguchi.jpg';
+  const defaultAvatarSrc = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="180" height="180"%3E%3Crect fill="%23f0f0f0" width="180" height="180"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="48" fill="%23999"%3E👤%3C/text%3E%3C/svg%3E';
   
   return `
     <article class="recommend-card-new">
       <!-- プロフィール画像（中央配置・角丸大） -->
       <div class="recommend-avatar-wrapper">
-        <img src="${avatarSrc}" alt="${escapeHtml(rec.recommenderName)}" class="recommend-avatar-large">
+        <img
+          src="${avatarSrc}"
+          alt="${escapeHtml(rec.recommenderName)}"
+          class="recommend-avatar-large recommend-card-image"
+          onerror="this.onerror=null; this.src='${fallbackAvatarSrc}'; this.onerror=function(){this.src='${defaultAvatarSrc}';}"
+          loading="lazy">
       </div>
       
       <!-- 推薦者情報（中央揃え） -->
