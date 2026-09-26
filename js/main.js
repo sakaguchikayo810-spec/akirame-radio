@@ -150,63 +150,85 @@ function parseCSVLine(line) {
   return result;
 }
 
-// レコメンドCSVパース
+// レコメンドCSVパース（改行を含むフィールドに対応）
 function parseRecommendCSV(csvText) {
-  const lines = csvText.split('\n');
   const recommendations = [];
+  const rows = [];
   
-  // ヘッダー行をスキップ（1行目）
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) continue;
+  // CSVを行に分割（ダブルクォート内の改行を考慮）
+  let currentRow = '';
+  let inQuotes = false;
+  
+  for (let i = 0; i < csvText.length; i++) {
+    const char = csvText[i];
+    const nextChar = csvText[i + 1];
     
-    // CSVの列を解析
-    const columns = parseCSVLine(line);
-    
-    // 列が8つ未満の場合はスキップ
-    if (columns.length < 8) {
-      continue;
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        // エスケープされたダブルクォート
+        currentRow += '""';
+        i++;
+      } else {
+        // クォートの開始/終了
+        inQuotes = !inQuotes;
+        currentRow += char;
+      }
+    } else if (char === '\n' && !inQuotes) {
+      // 行の終わり（クォート外の改行）
+      if (currentRow.trim()) {
+        rows.push(currentRow);
+      }
+      currentRow = '';
+    } else if (char === '\r' && nextChar === '\n' && !inQuotes) {
+      // Windows形式の改行（\r\n）
+      if (currentRow.trim()) {
+        rows.push(currentRow);
+      }
+      currentRow = '';
+      i++; // \nをスキップ
+    } else {
+      currentRow += char;
     }
+  }
+  
+  // 最後の行を追加
+  if (currentRow.trim()) {
+    rows.push(currentRow);
+  }
+  
+  // ヘッダー行をスキップして各行をパース
+  for (let i = 1; i < rows.length; i++) {
+    const columns = parseCSVLine(rows[i]);
     
-    // A列：エピソードタイトル
-    // B列：エピソード番号
+    // 実際のCSV構造：
+    // A列（0）：エピソード番号 / タイトル
+    // B列（1）：空（使用しない）
+    // C列（2）：推薦者肩書き
+    // D列（3）：推薦者名
+    // E列（4）：推しポイント（テーマ）
+    // F列（5）：推薦コメント
+    // G列（6）：Spotify URL
+    // H列（7）：Apple URL
     const episodeTitle = columns[0] ? columns[0].trim() : '';
-    const episodeNumber = columns[1] ? columns[1].trim() : '';
-    
-    // タイトルまたは番号が空の場合はスキップ
-    if (!episodeTitle || !episodeNumber) {
-      continue;
-    }
-    
-    // エピソード82を除外（企画回のため）
-    if (episodeNumber === '82') {
-      continue;
-    }
-    
-    // C列：推薦者肩書き
-    // D列：推薦者名
-    // E列：選定テーマ
-    // F列：推薦コメント
-    // G列：Spotify URL
-    // H列：Apple Podcast URL
     const recommenderTitle = columns[2] ? columns[2].trim() : '';
     const recommenderName = columns[3] ? columns[3].trim() : '';
     const theme = columns[4] ? columns[4].trim() : '';
-    const comment = columns[5] ? columns[5].trim() : '';
+    const comment = columns[5] || ''; // 改行を保持
     const spotifyUrl = columns[6] ? columns[6].trim() : '';
     const appleUrl = columns[7] ? columns[7].trim() : '';
     
-    recommendations.push({
+    const recData = {
       id: i,
       episodeTitle: episodeTitle,
-      episodeNumber: episodeNumber,
       recommenderTitle: recommenderTitle,
       recommenderName: recommenderName,
       theme: theme,
       comment: comment,
       spotifyUrl: spotifyUrl,
       appleUrl: appleUrl
-    });
+    };
+    
+    recommendations.push(recData);
   }
   
   return recommendations;
@@ -302,6 +324,10 @@ function renderRecommendations(recommendations) {
   const grid = document.getElementById('recommend-grid');
   if (!grid) return;
   
+  console.log('=== レコメンドレンダリング ===');
+  console.log('データ数:', recommendations.length);
+  console.log('全データ:', recommendations);
+  
   if (recommendations.length === 0) {
     grid.innerHTML = `
       <div class="empty-state">
@@ -311,69 +337,73 @@ function renderRecommendations(recommendations) {
     return;
   }
   
-  grid.innerHTML = recommendations.map(rec => createRecommendCard(rec)).join('');
+  // 最大2件まで表示
+  const displayRecommendations = recommendations.slice(0, 2);
+  console.log('表示データ（2件）:', displayRecommendations);
+  
+  grid.innerHTML = displayRecommendations.map(rec => createRecommendCard(rec)).join('');
 }
 
-// レコメンドカード生成
+// レコメンドカード生成（新デザイン：中央配置・アイコンボタン）
 function createRecommendCard(rec) {
+  console.log('=== カード生成 ===');
+  console.log('レコメンドデータ:', rec);
+  console.log('Spotify URL:', rec.spotifyUrl);
+  console.log('Apple URL:', rec.appleUrl);
+  console.log('コメント:', rec.comment);
+  console.log('コメント長:', rec.comment ? rec.comment.length : 0);
+  
   // URLの有無をチェック
   const hasSpotifyUrl = rec.spotifyUrl && rec.spotifyUrl.trim() !== '';
   const hasAppleUrl = rec.appleUrl && rec.appleUrl.trim() !== '';
   
+  console.log('Spotify表示:', hasSpotifyUrl);
+  console.log('Apple表示:', hasAppleUrl);
+  
   // 推薦者の画像パス
   const avatarSrc = 'images/kayo_sakaguchi.jpg';
   
-  // エピソード番号とタイトルを組み合わせて表示（#数字 タイトル の形式）
-const fullTitle = rec.title || rec.episodeTitle || '';
-  
   return `
-    <article class="recommend-card">
-      <div class="recommend-card-header">
-        <div class="recommender-info-wrapper">
-          <img src="${avatarSrc}" alt="${escapeHtml(rec.recommenderName)}" class="recommender-avatar">
-          <div class="recommender-info">
-            <p class="recommender-title">${escapeHtml(rec.recommenderTitle)}</p>
-            <p class="recommender-name">${escapeHtml(rec.recommenderName)}</p>
-          </div>
-        </div>
-        ${rec.theme ? `<span class="theme-badge">${escapeHtml(rec.theme)}</span>` : ''}
+    <article class="recommend-card-new">
+      <!-- プロフィール画像（中央配置・角丸大） -->
+      <div class="recommend-avatar-wrapper">
+        <img src="${avatarSrc}" alt="${escapeHtml(rec.recommenderName)}" class="recommend-avatar-large">
       </div>
       
-      <h3 class="recommend-episode-title">${escapeHtml(fullTitle)}</h3>
+      <!-- 推薦者情報（中央揃え） -->
+      <div class="recommend-profile">
+        <p class="recommend-profile-title">${escapeHtml(rec.recommenderTitle)}</p>
+        <p class="recommend-profile-name">${escapeHtml(rec.recommenderName)}</p>
+      </div>
       
-      <p class="recommend-comment">${escapeHtml(rec.comment)}</p>
-      
-      <div class="recommend-footer">
+      <!-- 音源リンク（アイコンボタン・中央揃え） -->
+      <div class="recommend-icons">
         ${hasSpotifyUrl ? `
-          <a href="${escapeHtml(rec.spotifyUrl)}" target="_blank" rel="noopener noreferrer" class="btn-listen btn-spotify">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <a href="${escapeHtml(rec.spotifyUrl)}" target="_blank" rel="noopener noreferrer" class="icon-btn icon-btn-spotify" aria-label="Spotifyで聴く">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
             </svg>
-            Spotify
           </a>
-        ` : `
-          <button class="btn-listen btn-spotify btn-disabled" disabled title="配信URLが未設定です">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-            </svg>
-            Spotify
-          </button>
-        `}
+        ` : ''}
         ${hasAppleUrl ? `
-          <a href="${escapeHtml(rec.appleUrl)}" target="_blank" rel="noopener noreferrer" class="btn-listen btn-apple">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <a href="${escapeHtml(rec.appleUrl)}" target="_blank" rel="noopener noreferrer" class="icon-btn icon-btn-apple" aria-label="Apple Podcastで聴く">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.182c5.423 0 9.818 4.395 9.818 9.818 0 5.423-4.395 9.818-9.818 9.818-5.423 0-9.818-4.395-9.818-9.818 0-5.423 4.395-9.818 9.818-9.818zM12 6c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 7.5c-1.381 0-2.5.672-2.5 1.5v3.75c0 .414.336.75.75.75h3.5c.414 0 .75-.336.75-.75V15c0-.828-1.119-1.5-2.5-1.5z"/>
             </svg>
-            Apple
           </a>
-        ` : `
-          <button class="btn-listen btn-apple btn-disabled" disabled title="配信URLが未設定です">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.182c5.423 0 9.818 4.395 9.818 9.818 0 5.423-4.395 9.818-9.818 9.818-5.423 0-9.818-4.395-9.818-9.818 0-5.423 4.395-9.818 9.818-9.818zM12 6c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 7.5c-1.381 0-2.5.672-2.5 1.5v3.75c0 .414.336.75.75.75h3.5c.414 0 .75-.336.75-.75V15c0-.828-1.119-1.5-2.5-1.5z"/>
-            </svg>
-            Apple
-          </button>
-        `}
+        ` : ''}
+      </div>
+      
+      <!-- カテゴリタグ（ピンク・中央配置） -->
+      ${rec.theme ? `
+        <div class="recommend-theme-wrapper">
+          <span class="recommend-theme-pill">${escapeHtml(rec.theme)}</span>
+        </div>
+      ` : ''}
+      
+      <!-- 本文エリア（左ピンクライン） -->
+      <div class="recommend-content">
+        <p class="recommend-text">${escapeHtml(rec.comment)}</p>
       </div>
     </article>
   `;
